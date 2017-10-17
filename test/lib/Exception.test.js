@@ -5,7 +5,7 @@
  * for terms.
  */
 
-/*global describe, it, beforeEach, before, after */
+/* global describe, it, beforeEach, before, after */
 
 var expect = require('chai').expect;
 var Exception = require('../../lib/Exception.js');
@@ -13,7 +13,8 @@ var Exception = require('../../lib/Exception.js');
 
 describe('Exception', function () {
     it('does not require path', function () {
-        var exception = new Exception(0, 'name', function(){});
+        var exception = new Exception(0, 'name', function() {});
+
         expect(exception.path).to.be.undefined;
     });
 
@@ -47,11 +48,13 @@ describe('Exception', function () {
 
         it('should return an instance of Error', function () {
             var e = Exception.create(Exception.OK);
+
             expect(e).to.be.instanceof(Error);
         });
 
         it('should return an instance of Exception', function () {
             var e = Exception.create(Exception.OK);
+
             expect(e).to.be.instanceof(Exception);
         });
     });
@@ -59,6 +62,7 @@ describe('Exception', function () {
     describe('getCode', function () {
         it('should return the given code.', function () {
             var e = Exception.create(Exception.SYSTEM_ERROR);
+
             expect(e.getCode()).to.equal(Exception.SYSTEM_ERROR);
         });
     });
@@ -66,6 +70,7 @@ describe('Exception', function () {
     describe('getName', function () {
         it('should return the correct name.', function () {
             var e = Exception.create(Exception.SYSTEM_ERROR);
+
             expect(e.getName()).to.equal('SYSTEM_ERROR');
         });
     });
@@ -73,6 +78,7 @@ describe('Exception', function () {
     describe('getPath', function () {
         it('should return the correct path.', function () {
             var e = Exception.create(Exception.SYSTEM_ERROR, '/test');
+
             expect(e.getPath()).to.equal('/test');
         });
     });

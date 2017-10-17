@@ -5,7 +5,7 @@
  * for terms.
  */
 
-/*global describe, it, beforeEach, before, after */
+/* global describe, it, beforeEach, before, after */
 
 var expect = require('chai').expect;
 var Path = require('../../lib/Path.js');

@@ -2,7 +2,7 @@
  * Copyright (c) 2013 Yahoo! Inc. All rights reserved.
  */
 
-/*global describe, it, beforeEach, before, after */
+/* global describe, it, beforeEach, before, after */
 
 var expect = require('chai').expect;
 
@@ -12,24 +12,30 @@ var ConnectionStringParser = require('../../lib/ConnectionStringParser.js');
 describe('ConnectionStringParser', function () {
     describe('constructor', function () {
         it('should reject null, undefined and empty string', function () {
-            expect(function () { return new ConnectionStringParser(); }).
+            expect(function () {
+                return new ConnectionStringParser();
+            }).
                 to.throw('non-empty string');
-            expect(function () { return new ConnectionStringParser(null); }).
+            expect(function () {
+                return new ConnectionStringParser(null);
+            }).
                 to.throw('non-empty string');
-            expect(function () { return new ConnectionStringParser(''); }).
+            expect(function () {
+                return new ConnectionStringParser('');
+            }).
                 to.throw('non-empty string');
         });
 
         it('should reject invalid chroot path', function () {
             expect(function () {
                 return new ConnectionStringParser('localhost:2181/../test/');
-                }).to.throw('path');
+            }).to.throw('path');
         });
 
         it('should reject empty server list.', function () {
             expect(function () {
                 return new ConnectionStringParser('/test');
-                }).to.throw('at least one');
+            }).to.throw('at least one');
         });
     });
 

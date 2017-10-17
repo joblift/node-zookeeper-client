@@ -5,7 +5,7 @@
  * for terms.
  */
 
-/*global describe, it, beforeEach, before, after */
+/* global describe, it, beforeEach, before, after */
 
 var expect = require('chai').expect;
 var State = require('../../lib/State.js');
@@ -38,4 +38,3 @@ describe('State', function () {
         expect(String(State.DISCONNECTED)).to.equal(expectedString);
     });
 });
-

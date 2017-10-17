@@ -5,7 +5,7 @@
  * for terms.
  */
 
-/*global describe, it, beforeEach, before, after */
+/* global describe, it, beforeEach, before, after */
 
 var expect = require('chai').expect;
 var Event = require('../../lib/Event.js');
@@ -66,7 +66,7 @@ describe('WatcherManager', function () {
         it('throws if registering something other then a function', function () {
             var wm = new WatcherManager();
 
-            expect(function(){
+            expect(function() {
                 wm.registerDataWatcher('/test', {});
             }).to.throw(Error, 'watcher must be a valid function.');
         });
@@ -75,24 +75,28 @@ describe('WatcherManager', function () {
     describe('isEmpty', function () {
         it('is empty if there are no watchers.', function () {
             var wm = new WatcherManager();
+
             expect(wm.isEmpty()).to.be.true;
         });
 
         it('is not empty if there is a data watcher.', function () {
             var wm = new WatcherManager();
-            wm.registerDataWatcher('/test', function(){});
+
+            wm.registerDataWatcher('/test', function() {});
             expect(wm.isEmpty()).to.be.false;
         });
 
         it('is not empty if there is a child watcher.', function () {
             var wm = new WatcherManager();
-            wm.registerChildWatcher('/test', function(){});
+
+            wm.registerChildWatcher('/test', function() {});
             expect(wm.isEmpty()).to.be.false;
         });
 
         it('is not empty if there is an existence watcher.', function () {
             var wm = new WatcherManager();
-            wm.registerExistenceWatcher('/test', function(){});
+
+            wm.registerExistenceWatcher('/test', function() {});
             expect(wm.isEmpty()).to.be.false;
         });
     });
@@ -100,24 +104,27 @@ describe('WatcherManager', function () {
     describe('getDataWatcherPaths', function () {
         it('is empty if there are no data watchers.', function () {
             var wm = new WatcherManager();
-            wm.registerExistenceWatcher('/existence', function(){});
-            wm.registerChildWatcher('/child', function(){});
+
+            wm.registerExistenceWatcher('/existence', function() {});
+            wm.registerChildWatcher('/child', function() {});
 
             expect(wm.getDataWatcherPaths()).to.deep.equal([]);
         });
 
         it('only returns paths of data watchers.', function () {
             var wm = new WatcherManager();
-            wm.registerDataWatcher('/data', function(){});
-            wm.registerExistenceWatcher('/existence', function(){});
-            wm.registerChildWatcher('/child', function(){});
+
+            wm.registerDataWatcher('/data', function() {});
+            wm.registerExistenceWatcher('/existence', function() {});
+            wm.registerChildWatcher('/child', function() {});
             expect(wm.getDataWatcherPaths()).to.deep.equal(['/data']);
         });
 
         it('does not duplicate paths.', function () {
             var wm = new WatcherManager();
-            wm.registerDataWatcher('/data', function(){});
-            wm.registerDataWatcher('/data', function(){});
+
+            wm.registerDataWatcher('/data', function() {});
+            wm.registerDataWatcher('/data', function() {});
             expect(wm.getDataWatcherPaths()).to.deep.equal(['/data']);
         });
     });
@@ -125,24 +132,27 @@ describe('WatcherManager', function () {
     describe('getExistenceWatcherPaths', function () {
         it('is empty if there are no existence watchers.', function () {
             var wm = new WatcherManager();
-            wm.registerDataWatcher('/data', function(){});
-            wm.registerChildWatcher('/child', function(){});
+
+            wm.registerDataWatcher('/data', function() {});
+            wm.registerChildWatcher('/child', function() {});
 
             expect(wm.getExistenceWatcherPaths()).to.deep.equal([]);
         });
 
         it('only returns paths of existence watchers.', function () {
             var wm = new WatcherManager();
-            wm.registerDataWatcher('/data', function(){});
-            wm.registerExistenceWatcher('/existence', function(){});
-            wm.registerChildWatcher('/child', function(){});
+
+            wm.registerDataWatcher('/data', function() {});
+            wm.registerExistenceWatcher('/existence', function() {});
+            wm.registerChildWatcher('/child', function() {});
             expect(wm.getExistenceWatcherPaths()).to.deep.equal(['/existence']);
         });
 
         it('does not duplicate paths.', function () {
             var wm = new WatcherManager();
-            wm.registerExistenceWatcher('/existence', function(){});
-            wm.registerExistenceWatcher('/existence', function(){});
+
+            wm.registerExistenceWatcher('/existence', function() {});
+            wm.registerExistenceWatcher('/existence', function() {});
             expect(wm.getExistenceWatcherPaths()).to.deep.equal(['/existence']);
         });
     });
@@ -150,24 +160,27 @@ describe('WatcherManager', function () {
     describe('getChildWatcherPaths', function () {
         it('is empty if there are no existence watchers.', function () {
             var wm = new WatcherManager();
-            wm.registerDataWatcher('/data', function(){});
-            wm.registerExistenceWatcher('/existence', function(){});
+
+            wm.registerDataWatcher('/data', function() {});
+            wm.registerExistenceWatcher('/existence', function() {});
 
             expect(wm.getChildWatcherPaths()).to.deep.equal([]);
         });
 
         it('only returns paths of child watchers.', function () {
             var wm = new WatcherManager();
-            wm.registerDataWatcher('/data', function(){});
-            wm.registerExistenceWatcher('/existence', function(){});
-            wm.registerChildWatcher('/child', function(){});
+
+            wm.registerDataWatcher('/data', function() {});
+            wm.registerExistenceWatcher('/existence', function() {});
+            wm.registerChildWatcher('/child', function() {});
             expect(wm.getChildWatcherPaths()).to.deep.equal(['/child']);
         });
 
         it('does not duplicate paths.', function () {
             var wm = new WatcherManager();
-            wm.registerChildWatcher('/child', function(){});
-            wm.registerChildWatcher('/child', function(){});
+
+            wm.registerChildWatcher('/child', function() {});
+            wm.registerChildWatcher('/child', function() {});
             expect(wm.getChildWatcherPaths()).to.deep.equal(['/child']);
         });
     });
@@ -176,17 +189,21 @@ describe('WatcherManager', function () {
         it('only emits valid objects.', function () {
             var wm = new WatcherManager();
 
-            expect(function(){
+            expect(function() {
                 wm.emit(null);
             }).to.throw(Error, 'watcherEvent must be a valid object.');
         });
 
         it('only emits known event types.', function () {
             var wm = new WatcherManager();
-            var fakeEvent = {type: 'fake event'};
+            var fakeEvent = {
+                type: 'fake event'
+            };
 
-            expect(function(){
-                wm.emit({type: 'fake event'});
+            expect(function() {
+                wm.emit({
+                    type: 'fake event'
+                });
             }).to.throw(Error, 'Unknown event type: ' + fakeEvent.type);
         });
 

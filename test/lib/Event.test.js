@@ -5,7 +5,7 @@
  * for terms.
  */
 
-/*global describe, it, beforeEach, before, after */
+/* global describe, it, beforeEach, before, after */
 
 var expect = require('chai').expect;
 var Event = require('../../lib/Event.js');
@@ -31,6 +31,7 @@ describe('Event', function () {
             var e = Event.create({
                 type : Event.NODE_CREATED
             });
+
             expect(e).to.be.instanceof(Event);
         });
     });
@@ -40,6 +41,7 @@ describe('Event', function () {
             var e = Event.create({
                 type : Event.NODE_DATA_CHANGED
             });
+
             expect(e.getType()).to.equal(Event.NODE_DATA_CHANGED);
         });
     });
@@ -49,6 +51,7 @@ describe('Event', function () {
             var e = Event.create({
                 type : Event.NODE_DELETED
             });
+
             expect(e.getName()).to.equal('NODE_DELETED');
         });
     });
@@ -59,6 +62,7 @@ describe('Event', function () {
                 type : Event.NODE_CREATED,
                 path : '/test'
             });
+
             expect(e.getPath()).to.equal('/test');
         });
     });
