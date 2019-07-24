@@ -2,7 +2,7 @@
   "name": "@joblift/node-zookeeper-client",
   "version": "0.5.0",
   "description": "A pure Javascript ZooKeeper client for Node.js.",
-  "author": "marudor <marudor@marudor.de>",
+  "author": "Joblift <dev@joblift.de>",
   "main": "dist/index.js",
   "keywords": [
     "zookeeper",
