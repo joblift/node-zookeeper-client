@@ -1,0 +1,7 @@
+name: node-zookeeper-client
+type: library
+language: javascript
+chapter: frontend
+responsibles:
+- Maja Jaensch
+- Reyna DeLogé
